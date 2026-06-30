@@ -11,3 +11,34 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+model Author {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  password String
+  posts    Post[]   // relation: link your post to you
+  
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  title     String
+  content   String
+  published Boolean   @default(false) // drafts vs published code
+  authorId  String
+  author    Author    @relation(fields: [authorId], references: [id])
+  comments  Comment[] // One-to-many relation with Comment
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt //tracks when last edited
+}
+
+model Comment {
+  id        String      @id @default(uuid())
+  content   String
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade) // Connects comment to a post
+  createdAt DateTime @default(now())
+}
+
+
