@@ -66,7 +66,7 @@ exports.updatepost = async (req, res) => {
          await prisma.post.delete({
             where: { id },
         })
-        res.json({ message: "post and comment successfully deleted"});
+        res.json({ message: "post and comment successfully delete"});
     }  catch (error) {
     res.status(500).json({ error: "failed to delete post" });
 }     
