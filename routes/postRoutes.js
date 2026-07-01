@@ -1,13 +1,16 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const postController = require('../controllers/postController');
+
+// You must explicitly add the '.js' extension for local files
+import postController from '../controllers/postController.js'; 
+
 
 // public routes to view posts
 router.get('/', postController.getAllPosts); //to fetch posts
  // author routes to manage post
 router.post('/:id', postController.createPost); 
-router.put('/:id', postController.updatepost);
+router.put('/:id', postController.updatePost);
 router.patch('/:id/publish', postController.togglePublish);
 router.delete('/:id', postController.deletePost)
 
-module.exports = router;
+export default router;

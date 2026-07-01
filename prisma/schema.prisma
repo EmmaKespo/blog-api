@@ -4,15 +4,13 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
-
-
 model Author {
   id       String   @id @default(uuid())
   email    String   @unique
@@ -40,5 +38,7 @@ model Comment {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade) // Connects comment to a post
   createdAt DateTime @default(now())
 }
+
+
 
 

@@ -1,8 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new prismaClient();
+import { prisma } from '../config/prisma.js';
+
 
  // GET ALL COMMENTS FOR A SPECIFIC POST
- exports.getCommentByPost = async (req, res) => {
+ const getCommentByPost = async (req, res) => {
     const { postId } = req.params;
     try {
         const comments = await prisma.comments.findMany({
@@ -16,7 +16,7 @@ const prisma = new prismaClient();
  };
 
  //CREATE A COMMENT
- exports.createComment = async (req, res) => {
+ const createComment = async (req, res) => {
        const { postId } = req.params;
        const { content } = req.body;
        try {
@@ -31,3 +31,7 @@ const prisma = new prismaClient();
         res.status(500).json({ error: "failed to add comment" })
        }
  };
+ export default {
+  getCommentByPost,
+  createComment
+};

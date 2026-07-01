@@ -1,9 +1,8 @@
-const { prismaClient } = require('@prisma/client');
-const prisma = new prismaClient();
+import { prisma } from '../config/prisma.js';
 
 // GET ALL POST
 // viewers see only published post
-exports.getPosts = async (req, res) => {
+const getAllPosts = async (req, res) => {
     try {
         const post = await prisma.post.findMany({
             where: { published: true },
@@ -15,7 +14,7 @@ exports.getPosts = async (req, res) => {
     }   
 };
  // CREATE A NEW POST (starts as draft)
-exports.createPost = async (req, res) => {
+const createPost = async (req, res) => {
     const { title, content, authorId } = req.body
     try {
         const newPost = await prisma.post.create({
@@ -32,7 +31,7 @@ exports.createPost = async (req, res) => {
 }
 };
 // EDIT A POST
-exports.updatepost = async (req, res) => {
+const updatePost = async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
     try {
@@ -46,7 +45,7 @@ exports.updatepost = async (req, res) => {
 }   
 };
  // PUBLISH / UNPUBLISH A POST (toggle)
- exports.togglePublish = async (req, res) => {
+ const togglePublish = async (req, res) => {
     const { id } = req.params;
     const { published } = req.body; // pass true or false
    try {
@@ -60,8 +59,8 @@ exports.updatepost = async (req, res) => {
 }   
  };
  // DELETE POST
- exports.deletePost = async (req, res) => {
-    const { id } = req.params,
+ const deletePost = async (req, res) => {
+    const { id } = req.params;
     try {
          await prisma.post.delete({
             where: { id },
@@ -72,5 +71,11 @@ exports.updatepost = async (req, res) => {
 }     
  }
 
-
+export default {
+    getAllPosts,
+    createPost,
+    updatePost,
+   togglePublish,
+  deletePost
+};
 
