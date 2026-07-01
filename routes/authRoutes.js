@@ -1,5 +1,5 @@
 import express from "express";
-const router = new express()
+const router = express.Router()
 
 import authController from "../controllers/authController";
 
