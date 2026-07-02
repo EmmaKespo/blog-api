@@ -3,7 +3,7 @@ const router = express.Router();
 import postController from '../controllers/postController.js';
 import requireAuth from '../middleware/authMiddleware.js'; 
 import validate from '../middleware/validateMiddleware.js';
-import { createPostSchema, updatePostSchema } from '../validation/postValidation.js';
+import { createPostSchema, updatePostSchema } from '../validators/postValidator.js';
 
 
 

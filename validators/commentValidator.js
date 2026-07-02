@@ -10,6 +10,4 @@ const createCommentSchema = z.object({
   }),
 });
 
-export default {
-  createCommentSchema,
-};
+export { createCommentSchema, };

@@ -1,6 +1,7 @@
 //blocks invalid passport for routes
-import { session } from "passport";
-import passport from "../config/passport";
+import pkg from "passport";
+const { session } = pkg;
+import passport from "../config/passport.js";
 // this middlware intercept request to secure routes
 
 const requireAuth = (req, res, next) => {

@@ -1,10 +1,11 @@
 // register account and logging in
-import { bcrypt } from "bcryptjs";
-import { jwt } from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { prisma } from "../config/prisma.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
-  //initial/master login which is done use 
+
+   // register which is done use 
 const register = async (req, res) => {
     const { email, password } = req.body;
     try{

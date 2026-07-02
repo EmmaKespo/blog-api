@@ -21,7 +21,5 @@ const updatePostSchema = z.object({
     content: z.string().min(20, 'Content must be at least 20 characters long').optional(),
   }),
 });
-export default {
-    createPostSchema,
-    updatePostSchema,
-}
+
+export { createPostSchema, updatePostSchema };

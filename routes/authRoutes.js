@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router()
 
-import authController from "../controllers/authController";
+import authController from "../controllers/authController.js";
 
 // route to create a single author account
 router.post('/register', authController.register)
