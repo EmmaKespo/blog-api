@@ -1,15 +1,19 @@
 import express from 'express';
 const router = express.Router();
-import requireAuth from '../middleware/authMiddleware.js';
+import postController from '../controllers/postController.js';
+import requireAuth from '../middleware/authMiddleware.js'; 
+import validate from '../middleware/validateMiddleware.js';
+import { createPostSchema, updatePostSchema } from '../validation/postValidation.js';
 
-import postController from '../controllers/postController.js'; 
 
 
-// public routes to view posts
-router.get('/',  postController.getAllPosts); //to fetch posts
+// public routes to view all posts
+router.get('/',  postController.getAllPosts); //to fetch all posts
  // author routes to manage post
-router.post('/:id', requireAuth, postController.createPost); 
-router.put('/:id', requireAuth, postController.updatePost);
+ // these routes require authentication and validation
+router.post('/:id', requireAuth, validate(createPostSchema), postController.createPost); 
+// update, publish, and delete before validate the data routes for posts
+router.put('/:id', requireAuth, validate(updatePostSchema), postController.updatePost);
 router.patch('/:id/publish', requireAuth, postController.togglePublish);
 router.delete('/:id', requireAuth, postController.deletePost)
 
